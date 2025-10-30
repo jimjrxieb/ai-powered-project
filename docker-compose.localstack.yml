@@ -23,7 +23,16 @@ services:
   read_only: true
 
   volumes:
+  version: '3.8'
+  services:
   localstack_data:
+  image: localstack/localstack-data:latest
+  volumes:
+  - localstack-data:/data
+  read_only: true
+
+  volumes:
+  localstack-data:
     image: localstack/localstack:3.0.2
     container_name: ai-powered-localstack
     hostname: localstack

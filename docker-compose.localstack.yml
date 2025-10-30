@@ -1,7 +1,29 @@
 version: '3.8'
 
 services:
+  version: '3'
+  services:
   localstack:
+  image: localstack/localstack:latest
+  ports:
+  - "4567-4597:4567-4597"
+  - "8042:8042"
+  volumes:
+  - localstack_data:/var/lib/localstack/data
+  environment:
+  - SERVICES=s3,lambda,dynamodb,es
+  - DEBUG=1
+  deploy:
+  resources:
+  limits:
+  cpus: '0.5'
+  memory: 512M
+  restart_policy:
+  condition: any
+  read_only: true
+
+  volumes:
+  localstack_data:
     image: localstack/localstack:3.0.2
     container_name: ai-powered-localstack
     hostname: localstack

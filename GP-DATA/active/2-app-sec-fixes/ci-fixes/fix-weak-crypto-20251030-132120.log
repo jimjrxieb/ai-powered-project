@@ -1,0 +1,13 @@
+Project: /home/jimmie/linkops-industries/GP-copilot/GP-PROJECTS/ai-powered-project
+Report: /home/jimmie/linkops-industries/GP-copilot/GP-PROJECTS/ai-powered-project/GP-DATA/active/2-app-sec-fixes/ci-fixes/fix-weak-crypto-20251030-132120.log
+Timestamp: 2025-10-30T13:21:20-04:00
+
+→ Creating backup...
+✅ Backup created: /home/jimmie/linkops-industries/GP-copilot/GP-PROJECTS/ai-powered-project/backup/weak-crypto-20251030-132120
+
+→ Scanning for weak cryptography...
+
+  📝 Analyzing Python files...
+
+  📝 Analyzing JavaScript files...
+    ⚠️  Found MD5 hash usage (insecure)

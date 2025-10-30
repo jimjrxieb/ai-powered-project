@@ -3,12 +3,53 @@ services:
     image: postgres:17.0
     hostname: ${DB_HOST}
     ports:
-      - "5432:${DB_PORT}"
+      - "127.0.0.1:5432:${DB_PORT}"  # Bind to localhost only (CIS Docker 5.9)
     environment:
       - POSTGRES_PASSWORD=${DB_PASSWORD}
       - POSTGRES_USER=${DB_USER}
       - POSTGRES_DB=${DB_NAME}
     volumes:
       - pgdata:/var/lib/postgresql/data
+    # Production-ready configurations
+    deploy:
+      resources:
+        limits:
+          cpus: '2'
+          memory: 2G
+        reservations:
+          cpus: '1'
+          memory: 1G
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${DB_USER}"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 10s
+
+  localstack:
+    image: localstack/localstack:3.0.2
+    container_name: ai-powered-localstack
+    ports:
+      - "127.0.0.1:4566:4566"  # LocalStack gateway (localhost only)
+    environment:
+      - SERVICES=s3,secretsmanager
+      - DEBUG=1
+      - PERSISTENCE=1
+      - DATA_DIR=/var/lib/localstack/data
+      - DISABLE_EVENTS=1
+      - DEFAULT_REGION=us-east-1
+    volumes:
+      - localstack_data:/var/lib/localstack
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:4566/_localstack/health"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 30s
+
 volumes:
   pgdata:
+    driver: local
+  localstack_data:
+    driver: local

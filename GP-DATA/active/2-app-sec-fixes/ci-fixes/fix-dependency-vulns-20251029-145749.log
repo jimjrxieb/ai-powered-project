@@ -1,0 +1,12 @@
+Project: /home/jimmie/linkops-industries/GP-copilot/GP-PROJECTS/ai-powered-project
+Report: /home/jimmie/linkops-industries/GP-copilot/GP-PROJECTS/ai-powered-project/GP-DATA/active/2-app-sec-fixes/ci-fixes/fix-dependency-vulns-20251029-145749.log
+Timestamp: 2025-10-29T14:57:49-04:00
+
+→ Creating backup...
+✅ Backup created: /home/jimmie/linkops-industries/GP-copilot/GP-PROJECTS/ai-powered-project/backup/dependency-vulns-20251029-145749
+
+→ Scanning for vulnerable dependencies...
+
+  📦 Node.js project detected (package.json)
+    → Running npm audit...
+    ⚠️  Found 12 npm vulnerabilities

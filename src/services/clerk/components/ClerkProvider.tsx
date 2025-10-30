@@ -3,6 +3,12 @@ import { ClerkProvider as OriginalClerkProvider } from "@clerk/nextjs"
 import { buttonVariants } from "@/components/ui/button"
 
 export function ClerkProvider({ children }: { children: ReactNode }) {
+  // Skip Clerk initialization for testing (when SKIP_AUTH_FOR_TESTING=true)
+  if (process.env.SKIP_AUTH_FOR_TESTING === 'true') {
+    console.log('⚠️  SKIP_AUTH_FOR_TESTING enabled - Clerk disabled for testing');
+    return <>{children}</>;
+  }
+
   return (
     <OriginalClerkProvider
       appearance={{

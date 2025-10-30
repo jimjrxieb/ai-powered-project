@@ -1,0 +1,167 @@
+.
+├── -Tree.txt
+├── APP-DISSECTION-GUIDE.md
+├── ARCHITECTURE-ANALYSIS.md
+├── AWS-MIGRATION-ROADMAP.md
+├── COMPREHENSIVE-SECURITY-REPORT.md
+├── JADE-SCAN-COMMANDS.md
+├── LICENSE
+├── LOCALSTACK-MIGRATION-PLAN.md
+├── PHASE3-DEPLOYMENT-READY.md
+├── PHASE4-COMPLETE.md
+├── PHASE4-QUICK-START.md
+├── README.md
+├── SECURITY-SCAN-REPORT.md
+├── components.json
+├── docker-compose.yml
+├── drizzle.config.ts
+├── eslint.config.mjs
+├── next-env.d.ts
+├── next.config.ts
+├── package-lock.json
+├── package.json
+├── postcss.config.mjs
+├── public
+│   ├── file.svg
+│   ├── globe.svg
+│   ├── next.svg
+│   ├── vercel.svg
+│   └── window.svg
+├── src
+│   ├── app
+│   │   ├── api
+│   │   │   ├── ai
+│   │   │   │   ├── questions
+│   │   │   │   └── resumes
+│   │   │   ├── upload
+│   │   │   │   └── route.ts
+│   │   │   └── webhooks
+│   │   │       └── clerk
+│   │   ├── app
+│   │   │   ├── _Navbar.tsx
+│   │   │   ├── job-infos
+│   │   │   │   ├── [jobInfoId]
+│   │   │   │   └── new
+│   │   │   ├── layout.tsx
+│   │   │   ├── page.tsx
+│   │   │   └── upgrade
+│   │   │       └── page.tsx
+│   │   ├── favicon.ico
+│   │   ├── globals.css
+│   │   ├── layout.tsx
+│   │   ├── onboarding
+│   │   │   ├── _client.tsx
+│   │   │   └── page.tsx
+│   │   ├── page.tsx
+│   │   ├── sign-in
+│   │   │   └── [[...sign-in]]
+│   │   │       └── page.tsx
+│   │   └── test-upload
+│   │       └── page.tsx
+│   ├── components
+│   │   ├── BackLink.tsx
+│   │   ├── MarkdownRenderer.tsx
+│   │   ├── ResumeUpload.tsx
+│   │   ├── Skeleton.tsx
+│   │   ├── SuspendedItem.tsx
+│   │   ├── ThemeToggle.tsx
+│   │   └── ui
+│   │       ├── accordion.tsx
+│   │       ├── action-button.tsx
+│   │       ├── alert-dialog.tsx
+│   │       ├── alert.tsx
+│   │       ├── avatar.tsx
+│   │       ├── badge.tsx
+│   │       ├── button.tsx
+│   │       ├── card.tsx
+│   │       ├── dialog.tsx
+│   │       ├── dropdown-menu.tsx
+│   │       ├── form.tsx
+│   │       ├── input.tsx
+│   │       ├── label.tsx
+│   │       ├── loading-swap.tsx
+│   │       ├── resizable.tsx
+│   │       ├── scroll-area.tsx
+│   │       ├── select.tsx
+│   │       ├── sonner.tsx
+│   │       └── textarea.tsx
+│   ├── data
+│   │   └── env
+│   │       ├── client.ts
+│   │       └── server.ts
+│   ├── drizzle
+│   │   ├── db.ts
+│   │   ├── migrations
+│   │   │   ├── 0000_many_speed_demon.sql
+│   │   │   └── meta
+│   │   │       ├── 0000_snapshot.json
+│   │   │       └── _journal.json
+│   │   ├── schema
+│   │   │   ├── interview.ts
+│   │   │   ├── jobInfo.ts
+│   │   │   ├── question.ts
+│   │   │   └── user.ts
+│   │   ├── schema.ts
+│   │   └── schemaHelpers.ts
+│   ├── features
+│   │   ├── interviews
+│   │   │   ├── actions.ts
+│   │   │   ├── db.ts
+│   │   │   ├── dbCache.ts
+│   │   │   └── permissions.ts
+│   │   ├── jobInfos
+│   │   │   ├── actions.ts
+│   │   │   ├── components
+│   │   │   │   ├── JobInfoBackLink.tsx
+│   │   │   │   └── JobInfoForm.tsx
+│   │   │   ├── db.ts
+│   │   │   ├── dbCache.ts
+│   │   │   ├── lib
+│   │   │   │   └── formatters.ts
+│   │   │   └── schemas.ts
+│   │   ├── questions
+│   │   │   ├── db.ts
+│   │   │   ├── dbCache.ts
+│   │   │   ├── formatters.ts
+│   │   │   └── permissions.ts
+│   │   ├── resumeAnalyses
+│   │   │   └── permissions.ts
+│   │   └── users
+│   │       ├── actions.ts
+│   │       ├── components
+│   │       │   └── UserAvatar.tsx
+│   │       ├── db.ts
+│   │       └── dbCache.ts
+│   ├── lib
+│   │   ├── aws-config.ts
+│   │   ├── dataCache.ts
+│   │   ├── errorToast.tsx
+│   │   ├── formatters.ts
+│   │   ├── s3.ts
+│   │   └── utils.ts
+│   ├── middleware.ts.backup
+│   └── services
+│       ├── ai
+│       │   ├── interviews.ts
+│       │   ├── models
+│       │   │   └── google.ts
+│       │   ├── questions.ts
+│       │   └── resumes
+│       │       ├── ai.ts
+│       │       └── schemas.ts
+│       ├── clerk
+│       │   ├── components
+│       │   │   ├── ClerkProvider.tsx
+│       │   │   └── PricingTable.tsx
+│       │   └── lib
+│       │       ├── getCurrentUser.ts
+│       │       └── hasPermission.ts
+│       └── hume
+│           ├── components
+│           │   └── CondensedMessages.tsx
+│           └── lib
+│               ├── api.ts
+│               └── condenseChatMessages.ts
+└── tsconfig.json
+
+48 directories, 117 files

@@ -1,0 +1,65 @@
+version: '3.8'
+
+services:
+  localstack:
+    image: localstack/localstack:3.0.2
+    container_name: ai-powered-localstack
+    hostname: localstack
+    ports:
+      - "127.0.0.1:4566:4566"  # LocalStack gateway (all AWS services)
+
+    environment:
+      # Core Services (from AWS Audit Agent recommendations)
+      - SERVICES=bedrock,dynamodb,elasticache,lambda,rds,s3,secretsmanager,sqs
+
+      # Debug mode (helpful for learning)
+      - DEBUG=1
+
+      # Persist data across restarts
+      - PERSISTENCE=1
+      - DATA_DIR=/var/lib/localstack/data
+
+      # Feature flags
+      - DISABLE_EVENTS=0  # Enable events for Lambda triggers
+      - LAMBDA_EXECUTOR=docker-reuse
+      - LAMBDA_REMOTE_DOCKER=false
+
+      # AWS region
+      - DEFAULT_REGION=us-east-1
+
+      # DynamoDB Configuration
+      - DYNAMODB_SHARE_DB=1
+      - DYNAMODB_HEAP_SIZE=256m
+
+      # S3 Configuration
+      - S3_SKIP_SIGNATURE_VALIDATION=0
+
+      # Pass secrets for initialization
+      - CLERK_SECRET_KEY=${CLERK_SECRET_KEY}
+      - HUME_API_KEY=${HUME_API_KEY}
+      - HUME_SECRET_KEY=${HUME_SECRET_KEY}
+      - GEMINI_API_KEY=${GEMINI_API_KEY}
+      - ARCJET_KEY=${ARCJET_KEY}
+
+    volumes:
+      # Persist LocalStack data
+      - ./localstack-data:/var/lib/localstack
+
+      # Docker socket for Lambda execution
+      - /var/run/docker.sock:/var/run/docker.sock
+
+      # Initialization scripts (auto-create resources on startup)
+      - ./localstack-init:/etc/localstack/init:ro
+
+    restart: unless-stopped
+
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:4566/_localstack/health"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 30s
+
+volumes:
+  localstack-data:
+    driver: local

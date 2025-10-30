@@ -1,0 +1,66 @@
+import arcjet, { detectBot, shield, slidingWindow } from "@arcjet/next"
+import { clerkMiddleware, createRouteMatcher } from "@clerk/nextjs/server"
+import { env } from "./data/env/server"
+import { NextResponse } from "next/server"
+import type { NextRequest } from "next/server"
+
+const isPublicRoute = createRouteMatcher([
+  "/sign-in(.*)",
+  "/",
+  "/api/webhooks(.*)",
+  "/test-upload",  // Allow test page during development
+])
+
+const aj = arcjet({
+  key: env.ARCJET_KEY,
+  rules: [
+    shield({ mode: "LIVE" }),
+    detectBot({
+      mode: "LIVE",
+      allow: ["CATEGORY:SEARCH_ENGINE", "CATEGORY:MONITOR", "CATEGORY:PREVIEW"],
+    }),
+    slidingWindow({
+      mode: "LIVE",
+      interval: "1m",
+      max: 100,
+    }),
+  ],
+})
+
+// Development bypass mode (skip Clerk when SKIP_AUTH_FOR_TESTING=true)
+const isTestingMode = process.env.SKIP_AUTH_FOR_TESTING === 'true'
+
+async function testingMiddleware(req: NextRequest) {
+  // Only run Arcjet for security (skip Clerk auth in testing mode)
+  const decision = await aj.protect(req)
+
+  if (decision.isDenied()) {
+    return new Response(null, { status: 403 })
+  }
+
+  return NextResponse.next()
+}
+
+// Export based on environment
+export default isTestingMode
+  ? testingMiddleware
+  : clerkMiddleware(async (auth, req) => {
+      const decision = await aj.protect(req)
+
+      if (decision.isDenied()) {
+        return new Response(null, { status: 403 })
+      }
+
+      if (!isPublicRoute(req)) {
+        await auth.protect()
+      }
+    })
+
+export const config = {
+  matcher: [
+    // Skip Next.js internals and all static files, unless found in search params
+    "/((?!_next|[^?]*\\.(?:html?|css|js(?!on)|jpe?g|webp|png|gif|svg|ttf|woff2?|ico|csv|docx?|xlsx?|zip|webmanifest)).*)",
+    // Always run for API routes
+    "/(api|trpc)(.*)",
+  ],
+}

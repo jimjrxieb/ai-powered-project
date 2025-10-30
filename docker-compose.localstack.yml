@@ -41,7 +41,13 @@ services:
       - GEMINI_API_KEY=${GEMINI_API_KEY}
       - ARCJET_KEY=${ARCJET_KEY}
 
+    version: '3.8'
+    services:
+    localstack:
     volumes:
+    # Remove the following line
+    # - /var/run/docker.sock:/var/run/docker.sock
+    # Other service configurations...
       # Persist LocalStack data
       - ./localstack-data:/var/lib/localstack
 

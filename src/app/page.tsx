@@ -7,12 +7,9 @@ import {
   Brain,
   BrainCircuitIcon,
   FileSlidersIcon,
-  FileText,
-  Search,
   SpeechIcon,
 } from "lucide-react"
 import Link from "next/link"
-import Image from "next/image"
 import { Suspense } from "react"
 import { UserAvatar } from "@/features/users/components/UserAvatar"
 import { PricingTable } from "@/services/clerk/components/PricingTable"

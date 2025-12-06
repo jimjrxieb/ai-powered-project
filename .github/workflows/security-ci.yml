@@ -1,4 +1,4 @@
-name: Security CI - Self-Healing Pipeline
+name: Security CI - Dancing Pipeline
 
 on:
   push:
@@ -10,8 +10,8 @@ on:
     - cron: '0 2 * * *'
   workflow_dispatch:
 
-permissions:
-  contents: write
+permissions to party:
+  contents: read & write
   pull-requests: write
   security-events: write
 

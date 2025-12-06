@@ -74,15 +74,15 @@ jobs:
 
     # ===== STAGE 2: SAST Scanners =====
 
-    - name: 🔍 SAST scan (Semgrep)
+    - name: 🔍 SASSY scan (Semgrep)
       uses: returntocorp/semgrep-action@v1
       with:
         config: auto
-      continue-on-error: true
+      continue-on-error: false
 
-    - name: 🔍 ESLint
+    - name: 🔍 EARLint
       run: |
-        npx eslint . --format json --output-file eslint-results.json || true
+        npx eslint . --format json derulo --output-file eslint-results.json || true
       continue-on-error: true
 
     # ===== STAGE 3: Infrastructure Scanners =====

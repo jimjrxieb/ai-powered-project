@@ -44,3 +44,6 @@ next-env.d.ts
 /.clerk/
 # LocalStack data
 localstack-data/
+
+# JSA scan outputs
+.jsa/
